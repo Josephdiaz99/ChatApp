@@ -35,29 +35,32 @@ const Auth = () => {
         setIsSignUp((prevIsSignup)=>!prevIsSignup)
     }
 
-    const handleSubmit= async (e)=>{
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const {fullName,userName,password,phoneNumber,avatarURL}=form;
+        const { userName, password, phoneNumber, avatarURL } = form;
 
-        const URL='http://localhost:5000/auth'
+        const URL = 'http://localhost:5000/auth';
+        // const URL = 'https://medical-pager.herokuapp.com/auth';
 
-        const {data:{token,userId,hashedPassword}}= await axios.post(`${URL}/${isSignUp} ? 'Registrate'  : 'Entrar' `,{
-            userName,password,fullName,phoneNumber,avatarURL
-        })
+        const { data: { token, userId, hashedPassword, fullName } } = await axios.post(`${URL}/${isSignUp ? 'signup' : 'login'}`, {
+            userName, password, fullName: form.fullName, phoneNumber, avatarURL,
+        });
 
-        cookies.set('token',token);
-        cookies.set('username',userName);
-        cookies.set('fullname',fullName);
-        cookies.set('userId',userId)
+        cookies.set('token', token);
+        cookies.set('username', userName);
+        cookies.set('fullName', fullName);
+        cookies.set('userId', userId);
 
-        if(isSignUp){
-            cookies.set('phoneNumber',phoneNumber);
-            cookies.set('avatarURL',avatarURL);
-            cookies.set('hashedPassword',hashedPassword)
+        if(isSignUp) {
+            cookies.set('phoneNumber', phoneNumber);
+            cookies.set('avatarURL', avatarURL);
+            cookies.set('hashedPassword', hashedPassword);
         }
+
         window.location.reload();
     }
+
 
   return (
     <div className='auth__form-container' >
