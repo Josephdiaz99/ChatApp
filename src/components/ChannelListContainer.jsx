@@ -38,7 +38,7 @@ const customChannelMessagingFilter = (channels) => {
 }
 
 
-const ChannelListContent = ({isCreating,setIsCreating,setCreateType,setIsEditing}) => {
+const ChannelListContent = ({isCreating,setIsCreating,setCreateType,setIsEditing,setToggleContainer}) => {
 
   const { client } = useChatContext()
 
@@ -61,7 +61,7 @@ const ChannelListContent = ({isCreating,setIsCreating,setCreateType,setIsEditing
     <SideBar logout={logout} />
     <div className='channel-list__list__wrapper'>
       <CompanyHeader/>
-      <ChannelSearch/>
+      <ChannelSearch setToggleContainer={setToggleContainer} />
       <ChannelList
        filters={filters}
        channelRenderFilterFn={customChannelTeamFilter}
@@ -73,11 +73,15 @@ const ChannelListContent = ({isCreating,setIsCreating,setCreateType,setIsEditing
             setIsCreating={setIsCreating}
              setCreateType={setCreateType}
              setIsEditing={setIsEditing}
+             setToggleContainer={setToggleContainer}
           />
         )}
         Preview={(previewProps)=>(
           <TeamChannelPreview
           {...previewProps}
+          setIsCreating={setIsCreating}
+          setIsEditing={setIsEditing}
+          setToggleContainer={setToggleContainer}
           type='team'
           />
         )}
@@ -93,11 +97,15 @@ const ChannelListContent = ({isCreating,setIsCreating,setCreateType,setIsEditing
             setIsCreating={setIsCreating} 
             setCreateType={setCreateType} 
             setIsEditing={setIsEditing}
+            setToggleContainer={setToggleContainer}
           />
         )}
         Preview={(previewProps)=>(
           <TeamChannelPreview
           {...previewProps}
+          setIsCreating={setIsCreating}
+          setIsEditing={setIsEditing}
+          setToggleContainer={setToggleContainer}
           type='messaging'
           />
         )}

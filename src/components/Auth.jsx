@@ -40,8 +40,8 @@ const Auth = () => {
 
         const { userName, password, phoneNumber, avatarURL } = form;
 
-        const URL = 'http://localhost:5000/auth';
-        // const URL = 'https://medical-pager.herokuapp.com/auth';
+        // const URL = 'http://localhost:5000/auth';
+        const URL = 'https://chatapplicationgod.herokuapp.com/auth';
 
         const { data: { token, userId, hashedPassword, fullName } } = await axios.post(`${URL}/${isSignUp ? 'signup' : 'login'}`, {
             userName, password, fullName: form.fullName, phoneNumber, avatarURL,
